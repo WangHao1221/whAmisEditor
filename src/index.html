@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="" style="font-size: 100px;" content="no-referrer" >
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <!-- <%= BASE_URL %> -->
+    <!-- <script src="<%= htmlWebpackPlugin.options.prodPublicPath %>sequence/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.5/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%= htmlWebpackPlugin.options.prodPublicPath %>sequence/webfont.js"></script>
+    <script src="<%= htmlWebpackPlugin.options.prodPublicPath %>sequence/underscore-min.js"></script>
+    <script src="<%= htmlWebpackPlugin.options.prodPublicPath %>sequence/snap.svg-min.js"></script>
+    <script src="<%= htmlWebpackPlugin.options.prodPublicPath %>sequence/sequence-diagram-snap-min.js"></script>
+    <script src="<%= htmlWebpackPlugin.options.prodPublicPath %>sequence/sequence-diagram-min.js"></script>
+    <script src="<%= htmlWebpackPlugin.options.prodPublicPath %>sequence/svginnerhtml.min.js"></script> -->
+  <!--  <script src="../public/sequence/snap.svg-min.js"/>
+    <script src="../public/sequence/underscore-min.js"/>
+    <script src="../public/sequence/sequence-diagram-min.js"/>
+    <script src="../public/sequence/jquery.min.js"/> -->
+    <!-- <link href="https://fonts.googleapis.com/css?family=Architects+Daughter" rel="stylesheet" type="text/css"> -->
+    <!-- <link rel="canonical" href="https://bramp.github.io/js-sequence-diagrams/" /> -->
+    <link rel="stylesheet" href="<%= htmlWebpackPlugin.options.prodPublicPath %>static/antdv/<%= htmlWebpackPlugin.options.defaultTheme %>" id="themeSkin">
+    <style>
+      @font-face {
+        font-family: 'danielbd';
+        src: url('danielbd.woff2') format('woff2'),
+            url('danielbd.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+    }
+      .ant-drawer-wrapper-body{
+        overflow: hidden;
+        padding-top: .55rem;
+      }
+      .ant-drawer-wrapper-body .ant-drawer-header{
+        margin-top: -.55rem;
+      }
+      .ant-drawer-wrapper-body .ant-drawer-body{
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+   
+    <noscript>
+      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app" style="height: 100%"></div>
+    <!-- built files will be auto injected -->
+  </body>
+</html>
