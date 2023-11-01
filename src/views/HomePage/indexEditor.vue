@@ -1,6 +1,10 @@
 <template>
   <div>
     <a-button type="primary" @click="goBack">返回</a-button>
+    <a-button type="primary" @click="toSave">保存</a-button>
+    <a-button type="primary" @click="isPreview = !isPreview">{{
+      isPreview ? "编辑" : "预览"
+    }}</a-button>
     <amisEditor
       theme="cxd"
       className="is-fixed"
@@ -41,121 +45,72 @@ function setSchema(e) {
 }
 
 function setAmisEnv() {
-  amisEnv.value = {};
-}
+  amisEnv.value = {
+    theme: "cxd", //antd
+    enableAMISDebug: false,
+    // fetcher: ({
+    // 	url, // 接口地址
+    // 	method, // 请求方法 get、post、put、delete
+    // 	data, // 请求数据
+    // 	responseType,
+    // 	config, // 其他配置
+    // 	headers // 请求头
+    // }) => {
+    // 	console.log('fetcher', method)
+    // 	config = config || {};
+    // 	config.withCredentials = true;
+    // 	responseType && (config.responseType = responseType);
 
-function saveData() {
-  console.log("saveData.....");
+    // 	if (config.cancelExecutor) {
+    // 	config.cancelToken = new (axios).CancelToken(
+    // 		config.cancelExecutor
+    // 	);
+    // 	}
+
+    // 	config.headers = headers || {};
+
+    // 	if (method !== 'post' && method !== 'put' && method !== 'patch') {
+    // 	if (data) {
+    // 		config.params = data;
+    // 	}
+    // 	return (axios)[method](url, config);
+    // 	} else if (data && data instanceof FormData) {
+    // 	config.headers = config.headers || {};
+    // 	config.headers['Content-Type'] = 'multipart/form-data';
+    // 	} else if (
+    // 	data &&
+    // 	typeof data !== 'string' &&
+    // 	!(data instanceof Blob) &&
+    // 	!(data instanceof ArrayBuffer)
+    // 	) {
+    // 	data = JSON.stringify(data);
+    // 	config.headers = config.headers || {};
+    // 	config.headers['Content-Type'] = 'application/json';
+    // 	}
+
+    // 	return (axios)[method](url, data, config);
+    // },
+    // isCancel: (value) => {
+    // 	console.log('isCancel')
+    // },
+    // copy: (content) => {
+    // 	console.log('copy')
+    // }
+  };
 }
 
 setAmisEnv();
-setSchema({
-  type: "page",
-  title: "home",
-  body: [
-    {
-      type: "chart",
-      config: {
-        tooltip: {
-          trigger: "axis",
-          showDelay: 0,
-          hideDelay: 100,
-          transitionDuration: 0.4,
-        },
-        xAxis: {
-          type: "category",
-          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-          id: "u:65553aec98e8",
-        },
-        yAxis: {
-          type: "value",
-          id: "u:f8c06de84046",
-        },
-        series: [
-          {
-            data: [820, 932, 901, 934, 1290, 1330, 1320],
-            type: "line",
-            id: "u:1b060b63b09a",
-          },
-        ],
-        title: {
-          text: "未来一周气温变化",
-          subtext: "纯属虚构",
-          itemGap: 10,
-          shadowBlur: 0,
-          shadowOffsetX: 0,
-          shadowOffsetY: 0,
-        },
-      },
-      replaceChartOption: true,
-      id: "u:b847da1db472",
-    },
-    {
-      type: "chart",
-      config: {
-        type: "page",
-        body: {
-          type: "chart",
-          config: {
-            legend: {
-              formatter: "function (name) { return 'Legend ' + name;}",
-            },
-            dataset: {
-              source: [
-                ["type", "2012", "2013", "2014", "2015", "2016"],
-                ["Forest", 320, 332, 301, 334, 390],
-                ["Steppe", 220, 182, 191, 234, 290],
-                ["Desert", 150, 232, 201, 154, 190],
-                ["Wetland", 98, 77, 101, 99, 40],
-              ],
-            },
-            xAxis: {
-              type: "category",
-              axisTick: {
-                show: false,
-              },
-            },
-            yAxis: {},
-            series: [
-              {
-                type: "bar",
-                seriesLayoutBy: "row",
-              },
-              {
-                type: "bar",
-                seriesLayoutBy: "row",
-              },
-              {
-                type: "bar",
-                seriesLayoutBy: "row",
-              },
-              {
-                type: "bar",
-                seriesLayoutBy: "row",
-              },
-            ],
-          },
-        },
-      },
-      replaceChartOption: true,
-      id: "u:57a6e6092e9e",
-    },
-  ],
-  id: "u:0fc1f3e02d00",
-  asideResizor: false,
-  style: {
-    boxShadow: " 0px 0px 0px 0px transparent",
-  },
-  pullRefresh: {
-    disabled: true,
-  },
-  toolbar: [],
-  aside: [],
-});
+let displayData = localStorage.getItem("schemaData");
+const amisSchema = displayData ? JSON.parse(displayData) : {};
+setSchema(amisSchema);
 
 const router = useRouter();
 const goBack = () => {
   router.go(-1);
+};
+const toSave = () => {
+  console.log("toSave...", schema.value);
+  localStorage.setItem("schemaData", JSON.stringify(schema.value));
 };
 </script>
 
